@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Schéma XSD - Contrat du Web Service SOAP (approche Contract-First)
+    Entité : Étudiant (id, nom, email)
+    Opérations définies :
+      1. AjouterEtudiant       → ajoute un étudiant
+      2. ConsulterEtudiant     → consulte un étudiant par son ID
+      3. ListerEtudiants       → retourne la liste complète des étudiants
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://devoir.com/soap/etudiant"
+           targetNamespace="http://devoir.com/soap/etudiant"
+           elementFormDefault="qualified">
+
+    <!-- =========================================================
+         Type complexe central : Étudiant
+         ========================================================= -->
+    <xs:complexType name="Etudiant">
+        <xs:sequence>
+            <xs:element name="id"    type="xs:int"/>
+            <xs:element name="nom"   type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- =========================================================
+         Opération 1 : AjouterEtudiant
+         ========================================================= -->
+
+    <!-- Requête : contient les données de l'étudiant à ajouter -->
+    <xs:element name="AjouterEtudiantRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="etudiant" type="tns:Etudiant"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Réponse : renvoie le message de confirmation et l'étudiant créé -->
+    <xs:element name="AjouterEtudiantResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message"  type="xs:string"/>
+                <xs:element name="etudiant" type="tns:Etudiant"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- =========================================================
+         Opération 2 : ConsulterEtudiant (par ID)
+         ========================================================= -->
+
+    <xs:element name="ConsulterEtudiantRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ConsulterEtudiantResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="etudiant" type="tns:Etudiant"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- =========================================================
+         Opération 3 : ListerEtudiants (tous)
+         ========================================================= -->
+
+    <xs:element name="ListerEtudiantsRequest">
+        <xs:complexType>
+            <!-- Requête vide : pas de paramètre nécessaire -->
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ListerEtudiantsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- minOccurs=0 : la liste peut être vide -->
+                <xs:element name="etudiant" type="tns:Etudiant"
+                            minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

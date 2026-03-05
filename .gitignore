@@ -1,0 +1,43 @@
+# ===========================
+# Maven
+# ===========================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ===========================
+# Spring Boot
+# ===========================
+*.pid
+*.pid.lock
+spring-shell.log
+
+# ===========================
+# IDE — IntelliJ IDEA
+# ===========================
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# ===========================
+# IDE — VS Code
+# ===========================
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+
+# ===========================
+# IDE — Eclipse
+# ===========================
+*.class
+
+# ===========================
+# OS
+# ===========================
+.DS_Store
+Thumbs.db
